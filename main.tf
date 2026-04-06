@@ -1,8 +1,20 @@
+locals {
+  active_project = var.pages_projects[var.pages_project_key]
+}
+
 # Cloudflare Pages project for the Astro site.
 resource "cloudflare_pages_project" "sybilsedge_project" {
   account_id        = var.cloudflare_account_id
-  name              = var.pages_project_name
-  production_branch = "main"
+  name              = local.active_project.pages_project_name
+  production_branch = local.active_project.production_branch
+  source = {
+    type = "github"
+    config = {
+      owner             = local.active_project.github_repo_owner
+      repo_name         = local.active_project.github_repo_name
+      production_branch = local.active_project.production_branch
+    }
+  }
 }
 
 # Preserve state continuity across provider v5 resource renames.
@@ -36,7 +48,7 @@ resource "cloudflare_dns_record" "sybilsedge_apex" {
   zone_id = var.cloudflare_zone_id
   name    = "@"
   type    = "CNAME"
-  content = "${var.pages_project_name}.pages.dev"
+  content = "${local.active_project.pages_project_name}.pages.dev"
   ttl     = 86400
   proxied = true
 }
@@ -46,7 +58,7 @@ resource "cloudflare_dns_record" "sybilsedge_www" {
   zone_id = var.cloudflare_zone_id
   name    = "www"
   type    = "CNAME"
-  content = "${var.pages_project_name}.pages.dev"
+  content = "${local.active_project.pages_project_name}.pages.dev"
   ttl     = 86400
   proxied = true
 }
