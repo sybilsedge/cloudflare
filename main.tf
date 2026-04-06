@@ -6,7 +6,7 @@ resource "cloudflare_pages_project" "sybilsedge" {
 }
 
 data "cloudflare_pages_project" "sybilsedge_project" {
-  account_id = var.cloudflare_account_id
+  account_id   = var.cloudflare_account_id
   project_name = "sybilsedge"
 }
 
