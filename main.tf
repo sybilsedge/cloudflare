@@ -13,13 +13,13 @@ data "cloudflare_pages_project" "sybilsedge_project" {
 # Link the sybilsedge.com domain to the Cloudflare Pages (Astro) project
 resource "cloudflare_pages_domain" "sybilsedge_apex" {
   account_id   = var.cloudflare_account_id
-  project_name = data.cloudflare_pages_project.sybilsedge.name
+  project_name = data.cloudflare_pages_project.sybilsedge_project.name
   domain       = "sybilsedge.com"
 }
 
 resource "cloudflare_pages_domain" "sybilsedge_www" {
   account_id   = var.cloudflare_account_id
-  project_name = data.cloudflare_pages_project.sybilsedge.name
+  project_name = data.cloudflare_pages_project.sybilsedge_project.name
   domain       = "www.sybilsedge.com"
 }
 
