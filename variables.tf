@@ -17,5 +17,5 @@ variable "cloudflare_account_id" {
 variable "pages_project_name" {
   description = "Cloudflare Pages project name for the Astro site"
   type        = string
-  default     = "sybilsedge"
+  default     = "sybilsedge-pages"
 }

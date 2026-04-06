@@ -1,7 +1,8 @@
-# Look up an existing Cloudflare Pages project managed outside Terraform.
-data "cloudflare_pages_project" "sybilsedge_project" {
-  account_id   = var.cloudflare_account_id
-  project_name = var.pages_project_name
+# Cloudflare Pages project for the Astro site.
+resource "cloudflare_pages_project" "sybilsedge_project" {
+  account_id        = var.cloudflare_account_id
+  name              = var.pages_project_name
+  production_branch = "main"
 }
 
 # Preserve state continuity across provider v5 resource renames.
@@ -18,13 +19,13 @@ moved {
 # Link the sybilsedge.com domain to the Cloudflare Pages (Astro) project
 resource "cloudflare_pages_domain" "sybilsedge_apex" {
   account_id   = var.cloudflare_account_id
-  project_name = data.cloudflare_pages_project.sybilsedge_project.name
+  project_name = cloudflare_pages_project.sybilsedge_project.name
   name         = "sybilsedge.com"
 }
 
 resource "cloudflare_pages_domain" "sybilsedge_www" {
   account_id   = var.cloudflare_account_id
-  project_name = data.cloudflare_pages_project.sybilsedge_project.name
+  project_name = cloudflare_pages_project.sybilsedge_project.name
   name         = "www.sybilsedge.com"
 }
 
