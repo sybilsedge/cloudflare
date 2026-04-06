@@ -14,19 +14,19 @@ data "cloudflare_pages_project" "sybilsedge_project" {
 resource "cloudflare_pages_domain" "sybilsedge_apex" {
   account_id   = var.cloudflare_account_id
   project_name = data.cloudflare_pages_project.sybilsedge_project.name
-  domain       = "sybilsedge.com"
+  name         = "sybilsedge.com"
 }
 
 resource "cloudflare_pages_domain" "sybilsedge_www" {
   account_id   = var.cloudflare_account_id
   project_name = data.cloudflare_pages_project.sybilsedge_project.name
-  domain       = "www.sybilsedge.com"
+  name         = "www.sybilsedge.com"
 }
 
 # DNS record for the apex domain pointing to Cloudflare Pages
 # Cloudflare supports CNAME flattening at the apex when proxied = true;
 # use "@" as the name to target the zone root.
-resource "cloudflare_record" "sybilsedge_apex" {
+resource "cloudflare_dns_record" "sybilsedge_apex" {
   zone_id = var.cloudflare_zone_id
   name    = "@"
   type    = "CNAME"
