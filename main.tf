@@ -5,22 +5,21 @@ resource "cloudflare_pages_project" "sybilsedge" {
   production_branch = "main"
 }
 
-# Cloudflare Worker for sybilsedge
-resource "cloudflare_worker" "sybilsedge" {
+data "cloudflare_pages_project" "sybilsedge_project" {
   account_id = var.cloudflare_account_id
-  name       = "sybilsedge"
+  project_name = "sybilsedge"
 }
 
 # Link the sybilsedge.com domain to the Cloudflare Pages (Astro) project
 resource "cloudflare_pages_domain" "sybilsedge_apex" {
   account_id   = var.cloudflare_account_id
-  project_name = cloudflare_pages_project.sybilsedge.name
+  project_name = data.cloudflare_pages_project.sybilsedge.name
   domain       = "sybilsedge.com"
 }
 
 resource "cloudflare_pages_domain" "sybilsedge_www" {
   account_id   = var.cloudflare_account_id
-  project_name = cloudflare_pages_project.sybilsedge.name
+  project_name = data.cloudflare_pages_project.sybilsedge.name
   domain       = "www.sybilsedge.com"
 }
 
