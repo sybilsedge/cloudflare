@@ -35,7 +35,7 @@ resource "cloudflare_dns_record" "sybilsedge_apex" {
 }
 
 # DNS record for the www subdomain pointing to Cloudflare Pages
-resource "cloudflare_record" "sybilsedge_www" {
+resource "cloudflare_dns_record" "sybilsedge_www" {
   zone_id = var.cloudflare_zone_id
   name    = "www"
   type    = "CNAME"
