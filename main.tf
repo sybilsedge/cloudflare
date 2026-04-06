@@ -30,7 +30,8 @@ resource "cloudflare_dns_record" "sybilsedge_apex" {
   zone_id = var.cloudflare_zone_id
   name    = "@"
   type    = "CNAME"
-  value   = "${var.pages_project_name}.pages.dev"
+  content = "${var.pages_project_name}.pages.dev"
+  ttl     = 1
   proxied = true
 }
 
@@ -39,6 +40,7 @@ resource "cloudflare_dns_record" "sybilsedge_www" {
   zone_id = var.cloudflare_zone_id
   name    = "www"
   type    = "CNAME"
-  value   = "${var.pages_project_name}.pages.dev"
+  content = "${var.pages_project_name}.pages.dev"
+  ttl     = 1
   proxied = true
 }
