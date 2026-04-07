@@ -49,7 +49,7 @@ resource "cloudflare_dns_record" "sybilsedge_apex" {
   name    = "@"
   type    = "CNAME"
   content = "${local.active_project.pages_project_name}.pages.dev"
-  ttl     = 86400
+  ttl     = 1
   proxied = true
 }
 
@@ -59,6 +59,6 @@ resource "cloudflare_dns_record" "sybilsedge_www" {
   name    = "www"
   type    = "CNAME"
   content = "${local.active_project.pages_project_name}.pages.dev"
-  ttl     = 86400
+  ttl     = 1
   proxied = true
 }
