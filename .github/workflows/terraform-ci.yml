@@ -19,6 +19,8 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v4
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v5
