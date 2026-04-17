@@ -21,15 +21,17 @@ resource "cloudflare_worker" "sybilsedge_worker" {
 
 # 
 resource "cloudflare_workers_custom_domain" "sybilsedge_root" {
-  account_id = var.cloudflare_account_id
-  hostname   = "sybilsedge.com"
-  service    = cloudflare_worker.sybilsedge_worker.name
-  zone_id    = var.cloudflare_zone_id
+  account_id  = var.cloudflare_account_id
+  hostname    = "sybilsedge.com"
+  service     = cloudflare_worker.sybilsedge_worker.name
+  zone_id     = var.cloudflare_zone_id
+  environment = "production"
 }
 
 resource "cloudflare_workers_custom_domain" "sybilsedge_www" {
-  account_id = var.cloudflare_account_id
-  hostname   = "www.sybilsedge.com"
-  service    = cloudflare_worker.sybilsedge_worker.name
-  zone_id    = var.cloudflare_zone_id
+  account_id  = var.cloudflare_account_id
+  hostname    = "www.sybilsedge.com"
+  service     = cloudflare_worker.sybilsedge_worker.name
+  zone_id     = var.cloudflare_zone_id
+  environment = "production"
 }
