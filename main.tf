@@ -19,7 +19,7 @@ resource "cloudflare_worker" "sybilsedge_worker" {
     tail_consumers = []
 }
 
-# $ terraform import cloudflare_workers_custom_domain.sybilsedge_root '/<domain_id>'
+# $ 
 resource "cloudflare_workers_custom_domain" "sybilsedge_root" {
   account_id = var.cloudflare_account_id
   hostname = "sybilsedge.com"
