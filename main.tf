@@ -19,18 +19,6 @@ resource "cloudflare_worker" "sybilsedge_worker" {
   tail_consumers = []
 }
 
-resource "cloudflare_dns_record" "sybilsedge_root" {
-  zone_id = "023e105f4ecef8ad9ca31a8372d0c353"
-  name    = "sybilsedge.com"
-  ttl     = 3600
-  type    = "A"
-  proxied = true
-  settings = {
-    ipv4_only = true
-    ipv6_only = true
-  }
-}
-
 # 
 resource "cloudflare_workers_custom_domain" "sybilsedge_root" {
   account_id = var.cloudflare_account_id
