@@ -1,0 +1,49 @@
+# .gitignore for Terraform
+
+# 1. Local execution and cache files
+# ----------------------------------
+.terraform/
+# This directory contains the providers and modules. It's regenerated on 'terraform init'.
+
+# 2. State files (CRITICAL)
+# ----------------------------------
+# Since you use Terraform Cloud, your state is stored remotely, 
+# but local runs can sometimes generate these files. 
+# NEVER commit these; they contain your raw infrastructure secrets.
+*.tfstate
+*.tfstate.*
+
+# 3. Variable files (Where secrets live)
+# ----------------------------------
+# We exclude all .tfvars files because they often contain sensitive data.
+*.tfvars
+*.tfvars.json
+
+# If you have specific, non-sensitive variables you WANT to commit, 
+# you can use an override file (uncomment if needed):
+# !variables.tfvars
+
+# 4. Local environment variables/secrets
+# ----------------------------------
+.env
+.envrc
+# These are common for tools like direnv or local shell scripts.
+
+# 5. Terraform Crash Logs
+# ----------------------------------
+crash.log
+crash.*.log
+
+# 6. Terraform Lock File
+# ----------------------------------
+# NOTE: It is generally recommended to COMMIT .terraform.lock.hcl 
+# so your team (or your CI/CD) uses the exact same provider versions.
+# If you want to ignore it (not recommended), uncomment the line below:
+# .terraform.lock.hcl
+
+# 7. OS/Editor specific
+# ----------------------------------
+.DS_Store
+.vscode/
+.idea/
+*.swp
